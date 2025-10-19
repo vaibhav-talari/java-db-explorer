@@ -82,6 +82,22 @@
                 </annotationProcessorPaths>
             </configuration>
         </plugin>
+        
+        <!--hibernate jpa metamodel generator-->
+        <plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+				<annotationProcessorPaths>
+					<path>
+						<groupId>org.hibernate.orm</groupId>
+						<artifactId>hibernate-processor</artifactId>
+						<version>${hibernate-core.version}</version>
+					</path>
+				</annotationProcessorPaths>
+				<!--<generatedSourcesDirectory>${project.basedir}/src/main/java/</generatedSourcesDirectory>-->
+			</configuration>
+		</plugin>
 	</plugins>
 </build>
 
