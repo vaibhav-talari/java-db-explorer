@@ -6,12 +6,39 @@
     <groupId>com.example.javadbexplorer</groupId>
     <version>1</version>
   </parent>
-
+  
   <artifactId>jpa-demonstrations</artifactId>
   <packaging>jar</packaging>
 
   <name>jpa-demonstrations</name>
   <description>A simple jpa-demonstrations.</description>
+  
+  <dependencies>
+  		<dependency>
+	  		<groupId>com.example.javadbexplorer</groupId>
+	  		<artifactId>common-entities</artifactId>
+			<version>1</version>
+		</dependency>
+		<!-- contains the jakarta.persistence module -->
+		<dependency>
+		    <groupId>jakarta.persistence</groupId>
+		    <artifactId>jakarta.persistence-api</artifactId>
+		    <version>3.2.0</version>
+		</dependency>
+		
+		<!--ORM-->
+		<dependency>
+		    <groupId>org.hibernate.orm</groupId>
+		    <artifactId>hibernate-core</artifactId>
+		    <version>${hibernate-core.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.zaxxer</groupId>
+			<artifactId>HikariCP</artifactId>
+			<version>7.0.2</version>
+		</dependency>
+  </dependencies>
 
   <build>
     <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->

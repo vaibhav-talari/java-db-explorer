@@ -14,9 +14,9 @@ import org.jdbc.demonstrations.dbconnections.JDBCPoolingExample;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class AppMain {
+public class JDBCAppMain {
 
-	private static Logger logger = LoggerFactory.getLogger(AppMain.class);
+	private static Logger logger = LoggerFactory.getLogger(JDBCAppMain.class);
 
 	public static void main(String[] args) {
 		CustomersDTO c = new CustomersDTO(null, "Jarvis", "jarvis@email.com", null, null);
