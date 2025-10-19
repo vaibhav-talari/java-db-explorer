@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <artifactId>java-db-explorer</artifactId>
+    <groupId>com.example.javadbexplorer</groupId>
+    <version>1</version>
+  </parent>
+
+  <artifactId>common-entities</artifactId>
+  <packaging>jar</packaging>
+
+  <name>common-entities</name>
+  <description>A simple common-entities.</description>
+  
+  <!--mariadb-java-client is required by hibernate during reverse engineering table to entity-->
+  <dependencies>
+  <!-- contains the jakarta.persistence module -->
+		<dependency>
+		    <groupId>jakarta.persistence</groupId>
+		    <artifactId>jakarta.persistence-api</artifactId>
+		    <version>3.2.0</version>
+		</dependency>
+  </dependencies>
+  
+  <build>
+	<plugins>
+	<!-- plugin to generate entity class from database schema -->
+		<plugin>
+			<groupId>org.hibernate.tool</groupId>
+	        <artifactId>hibernate-tools-maven</artifactId>
+	        <version>${hibernate-core.version}</version>
+	        <dependencies>
+	          <dependency>
+	            <groupId>org.hibernate.tool</groupId>
+	            <artifactId>hibernate-tools-orm</artifactId>
+	            <version>${hibernate-core.version}</version>
+	          </dependency>
+	         </dependencies>
+	         <executions>
+	          <execution>
+	            <id>entity-generation</id>
+	            <phase>generate-sources</phase>
+	            <goals>
+	              <goal>hbm2java</goal>
+	            </goals>
+	            <configuration>
+	            	<!--output directory-->
+				    <outputDirectory>${project.basedir}/src/main/java/</outputDirectory>
+				    <!--package name to output generated entity java files-->
+				    <packageName>org.common.entities.dbentities</packageName>
+				    <ejb3>true</ejb3>
+				</configuration>
+	          </execution>
+	        </executions>
+		</plugin>
+	</plugins>
+</build>
+
+</project>

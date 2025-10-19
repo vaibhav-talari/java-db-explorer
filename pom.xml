@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project
+	xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.example.javadbexplorer</groupId>
+	<artifactId>java-db-explorer</artifactId>
+	<version>1</version>
+	<packaging>pom</packaging>
+	<name>java-db-explorer</name>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<target.java.version>25</target.java.version>
+		<maven.compiler.source>${target.java.version}</maven.compiler.source>
+		<maven.compiler.target>${target.java.version}</maven.compiler.target>
+		<hibernate-core.version>7.1.3.Final</hibernate-core.version>
+	</properties>
+	
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>3.8.1</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<!-- 1. required by hibernate during reverse engineering table to entity-->
+		<!-- 2. required by jdbc or hibernate to connect to mariadb with java code-->
+		<dependency>
+			<groupId>org.mariadb.jdbc</groupId>
+			<artifactId>mariadb-java-client</artifactId>
+			<version>3.5.5</version>
+		</dependency>
+		
+		<!--Logging-->
+		<dependency>
+		    <groupId>org.apache.logging.log4j</groupId>
+		    <artifactId>log4j-api</artifactId>
+		    <version>2.25.1</version>
+		</dependency>
+
+		<dependency>
+		    <groupId>org.apache.logging.log4j</groupId>
+		    <artifactId>log4j-core</artifactId>
+		    <version>2.25.1</version>
+		</dependency>
+
+		<dependency>
+		    <groupId>org.apache.logging.log4j</groupId>
+		    <artifactId>log4j-slf4j2-impl</artifactId>
+		    <version>2.25.1</version>
+		</dependency>
+	</dependencies>
+	<modules>
+		<module>common-entities</module>
+		<module>jdbc-demonstrations</module>
+		<module>jpa-demonstrations</module>
+		<module>jakarta-data-demonstrations</module>
+	</modules>
+</project>
