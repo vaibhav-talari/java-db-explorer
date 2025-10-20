@@ -1,5 +1,5 @@
 package org.common.entities.dbentities;
-// Generated 2025 Oct 20 00:14:06 by Hibernate Tools 7.1.3.Final
+// Generated 2025 Oct 20 15:11:04 by Hibernate Tools 7.1.3.Final
 
 
 import jakarta.persistence.Column;

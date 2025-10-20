@@ -1,9 +1,11 @@
 package org.jakarta.data.demonstrations.repository;
 
-import org.common.entities.dbentities.Customers;
+import org.common.entities.dbentities.OrderItems;
 
 import jakarta.data.repository.CrudRepository;
+import jakarta.data.repository.Repository;
 
-public interface OrderItemsRepository extends CrudRepository<Customers, Long> {
+@Repository
+public interface OrderItemsRepository extends CrudRepository<OrderItems, Long> {
 
 }
