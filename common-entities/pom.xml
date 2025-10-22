@@ -1,111 +1,101 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <artifactId>java-db-explorer</artifactId>
-    <groupId>com.example.javadbexplorer</groupId>
-    <version>1</version>
-  </parent>
-
-  <artifactId>common-entities</artifactId>
-  <packaging>jar</packaging>
-
-  <name>common-entities</name>
-  <description>A simple common-entities.</description>
-  
-  <properties>
-		<org.mapstruct.version>1.6.3</org.mapstruct.version>
-	</properties>
-  
-  <!--mariadb-java-client is required by hibernate during reverse engineering table to entity-->
-  <dependencies>
-  <!-- contains the jakarta.persistence module -->
+<project
+	xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>java-db-explorer</artifactId>
+		<groupId>com.example.javadbexplorer</groupId>
+		<version>1</version>
+	</parent>
+	<artifactId>common-entities</artifactId>
+	<packaging>jar</packaging>
+	<name>common-entities</name>
+	<description>A simple common-entities.</description>
+	
+	<!--mariadb-java-client is required by hibernate during reverse engineering table to entity-->
+	<dependencies>
+		<!-- contains the jakarta.persistence module -->
 		<dependency>
-		    <groupId>jakarta.persistence</groupId>
-		    <artifactId>jakarta.persistence-api</artifactId>
-		    <version>3.2.0</version>
+			<groupId>jakarta.persistence</groupId>
+			<artifactId>jakarta.persistence-api</artifactId>
 		</dependency>
-		
 		<dependency>
-	        <groupId>org.mapstruct</groupId>
-	        <artifactId>mapstruct</artifactId>
-	        <version>${org.mapstruct.version}</version>
-	    </dependency>
-  </dependencies>
-  
-  <build>
-	<plugins>
-	<!-- plugin to generate entity class from database schema -->
-		<plugin>
-			<groupId>org.hibernate.tool</groupId>
-	        <artifactId>hibernate-tools-maven</artifactId>
-	        <version>${hibernate-core.version}</version>
-	        <dependencies>
-	          <dependency>
-	            <groupId>org.hibernate.tool</groupId>
-	            <artifactId>hibernate-tools-orm</artifactId>
-	            <version>${hibernate-core.version}</version>
-	          </dependency>
-	         </dependencies>
-	         <executions>
-	          <execution>
-	            <id>entity-generation</id>
-	            <phase>generate-sources</phase>
-	            <goals>
-	              <goal>hbm2java</goal>
-	            </goals>
-	            <configuration>
-	            	<!--output directory-->
-				    <outputDirectory>${project.basedir}/src/main/java/</outputDirectory>
-				    <!--package name to output generated entity java files-->
-				    <packageName>org.common.entities.dbentities</packageName>
-				    <ejb3>true</ejb3>
-				    <jdk5>true</jdk5>
-				</configuration>
-	          </execution>
-	        </executions>
-		</plugin>
-		
-        <!--hibernate jpa metamodel generator-->
-        <plugin>
-			<groupId>org.apache.maven.plugins</groupId>
-			<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-				<annotationProcessorPaths>
-					<path>
-						<groupId>org.hibernate.orm</groupId>
-						<artifactId>hibernate-processor</artifactId>
+			<groupId>org.mapstruct</groupId>
+			<artifactId>mapstruct</artifactId>
+		</dependency>
+	</dependencies>
+	<build>
+		<plugins>
+			<!-- plugin to generate entity class from database schema -->
+			<plugin>
+				<groupId>org.hibernate.tool</groupId>
+				<artifactId>hibernate-tools-maven</artifactId>
+				<version>${hibernate-core.version}</version>
+				<dependencies>
+					<dependency>
+						<groupId>org.hibernate.tool</groupId>
+						<artifactId>hibernate-tools-orm</artifactId>
 						<version>${hibernate-core.version}</version>
-					</path>
-					<path>
-                        <groupId>org.mapstruct</groupId>
-                        <artifactId>mapstruct-processor</artifactId>
-                        <version>${org.mapstruct.version}</version>
-                    </path>
-				</annotationProcessorPaths>
-			</configuration>
-		</plugin>
-		
-		<plugin>
-	        <groupId>org.codehaus.mojo</groupId>
-	        <artifactId>build-helper-maven-plugin</artifactId>
-	        <version>3.6.1</version>
-		        <executions>
-		          <execution>
-		            <id>add-source</id>
-		            <phase>generate-sources</phase>
-		            <goals>
-		              <goal>add-source</goal>
-		            </goals>
-		            <configuration>
-		              <sources>
-		                <source>target/generated-sources/annotations/</source>
-		              </sources>
-		            </configuration>
-		          </execution>
-		        </executions>
-      </plugin>
-	</plugins>
-</build>
-
+					</dependency>
+				</dependencies>
+				<executions>
+					<execution>
+						<id>entity-generation</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>hbm2java</goal>
+						</goals>
+						<configuration>
+							<!--output directory-->
+							<outputDirectory>${project.basedir}/src/main/java/</outputDirectory>
+							<!--package name to output generated entity java files-->
+							<packageName>org.common.entities.dbentities</packageName>
+							<ejb3>true</ejb3>
+							<jdk5>true</jdk5>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<annotationProcessorPaths>
+						<!--hibernate jpa metamodel generator, it generates the implemenation classes as '<Entity>_' -->
+						<path>
+							<groupId>org.hibernate.orm</groupId>
+							<artifactId>hibernate-processor</artifactId>
+							<version>${hibernate-core.version}</version>
+						</path>
+						<!--map struct implementation generator module-->
+						<path>
+							<groupId>org.mapstruct</groupId>
+							<artifactId>mapstruct-processor</artifactId>
+							<version>${org.mapstruct.version}</version>
+						</path>
+					</annotationProcessorPaths>
+				</configuration>
+			</plugin>
+			<plugin>
+				<!-- Adds the specified path as a source folder so that both Maven and Eclipse recognize it as part of the project sources -->
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>add-source</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>add-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>target/generated-sources/annotations/</source>
+							</sources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 </project>

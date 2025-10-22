@@ -1,176 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <artifactId>java-db-explorer</artifactId>
-    <groupId>com.example.javadbexplorer</groupId>
-    <version>1</version>
-  </parent>
-
-  <artifactId>jakarta-data-demonstrations</artifactId>
-
-  <name>jakarta-data-demonstrations</name>
-  <description>A simple jakarta-data-demonstrations.</description>
-
-  <dependencies>
-    	<!-- jakarta data -->
+<project
+	xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>java-db-explorer</artifactId>
+		<groupId>com.example.javadbexplorer</groupId>
+		<version>1</version>
+	</parent>
+	<artifactId>jakarta-data-demonstrations</artifactId>
+	<name>jakarta-data-demonstrations</name>
+	<description>A simple jakarta-data-demonstrations.</description>
+	<dependencies>
 		<dependency>
-		    <groupId>jakarta.data</groupId>
-		    <artifactId>jakarta.data-api</artifactId>
-		    <version>1.0.1</version>
-		</dependency>
-		
-		<dependency>
-	  		<groupId>com.example.javadbexplorer</groupId>
-	  		<artifactId>common-entities</artifactId>
+			<groupId>com.example.javadbexplorer</groupId>
+			<artifactId>common-entities</artifactId>
 			<version>1</version>
 		</dependency>
-		
-		<!--ORM-->
+		<!-- jakarta data api-->
 		<dependency>
-		    <groupId>org.hibernate.orm</groupId>
-		    <artifactId>hibernate-core</artifactId>
-		    <version>${hibernate-core.version}</version>
+			<groupId>jakarta.data</groupId>
+			<artifactId>jakarta.data-api</artifactId>
 		</dependency>
-		
-		<!-- jakarta dependency injection library -->
-		<!--<dependency>
-		    <groupId>jakarta.enterprise</groupId>
-		    <artifactId>jakarta.enterprise.cdi-api</artifactId>
-		    <version>4.1.0</version>
-		</dependency>-->
-		
-		<!-- cdi implementation library to be used as standalone -->
-		<!--<dependency>
-		    <groupId>org.jboss.weld.servlet</groupId>
-		    <artifactId>weld-servlet-core</artifactId>
-		    <version>6.0.3.Final</version>
-		</dependency>-->
-		
-		<!-- Jakarta EE APIs -->
-		  <!--<dependency>
-		    <groupId>jakarta.platform</groupId>
-		    <artifactId>jakarta.jakartaee-web-api</artifactId>
-		    <version>11.0.0</version>
-		    <scope>provided</scope>
-		  </dependency>-->
-		
-		<!-- Tomcat 11 embedded runtime -->
-		  <!--<dependency>
-		    <groupId>org.apache.tomcat.embed</groupId>
-		    <artifactId>tomcat-embed-core</artifactId>
-		    <version>11.0.3</version>
-		  </dependency>
-		  <dependency>
-		    <groupId>org.apache.tomcat.embed</groupId>
-		    <artifactId>tomcat-embed-jasper</artifactId>
-		    <version>11.0.3</version>
-		  </dependency>
-		  <dependency>
-		    <groupId>org.apache.tomcat.embed</groupId>
-		    <artifactId>tomcat-embed-el</artifactId>
-		    <version>11.0.3</version>
-		  </dependency>-->
-		  
-		  <!-- rest api annotation implementations -->
-		<!--<dependency>
-		    <groupId>org.glassfish.jersey.bundles</groupId>
-		    <artifactId>jaxrs-ri</artifactId>
-		    <version>3.1.11</version>
-		</dependency>
-		
+		<!--object relation mapping provider (ORM), the hibernate orm core has the implementation details for both jpa and jakarta data-->
 		<dependency>
-		  <groupId>org.glassfish.jersey.inject</groupId>
-		  <artifactId>jersey-hk2</artifactId>
-		  <version>3.0.11</version>
-		</dependency>-->
-  </dependencies>
-
-  <build>
-  	<plugins>
-  		<plugin>
-			<groupId>org.apache.maven.plugins</groupId>
-			<artifactId>maven-compiler-plugin</artifactId>
+			<groupId>org.hibernate.orm</groupId>
+			<artifactId>hibernate-core</artifactId>
+		</dependency>
+	</dependencies>
+	<build>
+		<plugins>
+			<!-- hibernate annotation processor which produces the Jakarta Persistence 
+		static metamodel, validates queries at compilation time,
+		 and implements Jakarta Data repositories  -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
-				<annotationProcessorPaths>
-					<path>
-						<groupId>org.hibernate.orm</groupId>
-						<artifactId>hibernate-processor</artifactId>
-						<version>${hibernate-core.version}</version>
-					</path>
-				</annotationProcessorPaths>
-			</configuration>
-		</plugin>
-		
-		<plugin>
-	        <groupId>org.codehaus.mojo</groupId>
-	        <artifactId>build-helper-maven-plugin</artifactId>
-	        <version>3.6.1</version>
-		        <executions>
-		          <execution>
-		            <id>add-source</id>
-		            <phase>generate-sources</phase>
-		            <goals>
-		              <goal>add-source</goal>
-		            </goals>
-		            <configuration>
-		              <sources>
-		                <source>target/generated-sources/annotations/</source>
-		              </sources>
-		            </configuration>
-		          </execution>
-		        </executions>
-      </plugin>
-	</plugins>
-  
-    <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
-      <plugins>
-        <plugin>
-          <artifactId>maven-clean-plugin</artifactId>
-          <version>3.4.0</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-site-plugin</artifactId>
-          <version>3.12.1</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-project-info-reports-plugin</artifactId>
-          <version>3.6.1</version>
-        </plugin>
-        <!-- see http://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_jar_packaging -->
-        <plugin>
-          <artifactId>maven-resources-plugin</artifactId>
-          <version>3.3.1</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-compiler-plugin</artifactId>
-          <version>3.13.0</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-surefire-plugin</artifactId>
-          <version>3.3.0</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-jar-plugin</artifactId>
-          <version>3.4.2</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-install-plugin</artifactId>
-          <version>3.1.2</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-deploy-plugin</artifactId>
-          <version>3.1.2</version>
-        </plugin>
-      </plugins>
-    </pluginManagement>
-  </build>
-
-  <reporting>
-    <plugins>
-      <plugin>
-        <artifactId>maven-project-info-reports-plugin</artifactId>
-      </plugin>
-    </plugins>
-  </reporting>
+					<annotationProcessorPaths>
+						<path>
+							<groupId>org.hibernate.orm</groupId>
+							<artifactId>hibernate-processor</artifactId>
+							<version>${hibernate-core.version}</version>
+						</path>
+					</annotationProcessorPaths>
+				</configuration>
+			</plugin>
+			<!-- maven plugin to add generated source as source folder for eclipse to 
+			recognize the generated code as source. Ideally you need to require it, 
+			we are doing this since we are testing Jakarta Data API without CDI and 
+			directly instantiation the repository interface generated by 
+			the hibernate processor plugin. -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>add-source</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>add-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>target/generated-sources/annotations/</source>
+							</sources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 </project>
